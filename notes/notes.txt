@@ -1,0 +1,36 @@
+A term or phrase typed into a search box?
+-String
+If a user is logged in?
+-Boolean
+A discount amount to apply to a user's shopping cart?
+-Number
+Whether or not a coupon code is valid?
+-Boolean
+An email address typed into a registration form?
+-String
+The price of a product?
+-Number
+
+
+Basic Arithmetic Operators = 
++ Addition
+- Subtraction
+* Multiplication
+/ Division
+
+1 + 1 = 2
+3 / 2 = 1.5
+6 - 3 = 3
+5 * 5 = 25
+
+% Modulus Operator
+
+5 % 2 = 1
+
+5 % 3 = 2
+
+Concatenation = combining 2 strings together.
+
+'Hello,' + 'World!' = Hello, World!
+
+
