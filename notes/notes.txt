@@ -3,6 +3,7 @@ How to push up information / documents to GitHub.
 2.	git status
 3.	git add .
 4.	git commit -m "message" (message is like an update... "updated notes / corrections made")
+5.	git push origin main
 
 
 A term or phrase typed into a search box?
