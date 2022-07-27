@@ -1,3 +1,10 @@
+How to push up information / documents to GitHub.
+1.	cd to the project root (the name of the project directory)
+2.	git status
+3.	git add .
+4.	git commit -m "message" (message is like an update... "updated notes / corrections made")
+
+
 A term or phrase typed into a search box?
 -String
 If a user is logged in?
