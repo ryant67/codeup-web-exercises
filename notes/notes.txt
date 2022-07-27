@@ -5,6 +5,8 @@ How to push up information / documents to GitHub.
 4.	git commit -m "message" (message is like an update... "updated notes / corrections made")
 5.	git push origin main
 
+(GIT Command) = 
+git stash = removes or clears any changes to documents before you 'push' up to GitHub.
 
 A term or phrase typed into a search box?
 -String

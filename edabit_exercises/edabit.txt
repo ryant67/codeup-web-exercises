@@ -1,0 +1,19 @@
+function hello() {
+	return('hello edabit.com')
+}
+
+function cubes(a) {
+	return a ** 3
+}
+
+function nextEdge(side1, side2) {
+	return(side1 + side2) - 1
+}
+
+function addition(num) {
+	return(num + 1)
+}
+
+function calcAge(age) {
+	return(age * 365)
+}

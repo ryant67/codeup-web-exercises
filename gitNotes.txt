@@ -1,0 +1,7 @@
+git init
+git remote add origin (yourSSHKey)
+git add . // the "." is stating that you'll be sending the entire directory that has been changed.
+git commit -m "your message" // your message should be a brief explanation of what has been changed or updated.
+git status // displays the status of what's being pushed or which file has been changed or updated.
+git branch // displays your current branch that will be pushed to GitHub. Ensure you're pushing the right directory.
+git push origin "branchName" // "branchName" will most likely be "main".
