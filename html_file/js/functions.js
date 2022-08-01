@@ -111,3 +111,13 @@ console.log(calculateTip());
  *
  * > applyDiscount(45.99, 0.12) // 40.4712
  */
+
+function applyDiscount(price) {
+    var originalPrice = 45.99;
+    var discountPercent = .12;
+    var discountAmount = originalPrice * discountPercent;
+    console.log(discountAmount);
+    return originalPrice - discountAmount;
+}
+
+console.log(applyDiscount());
