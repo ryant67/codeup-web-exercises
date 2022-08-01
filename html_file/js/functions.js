@@ -58,8 +58,7 @@ console.log(random);
  */
 
 function isTwo(number) {
-    var test = (random === 2);
-    return test;
+    return number === 2;
 }
 
 console.log(isTwo(random));
@@ -87,7 +86,7 @@ function calculateTip(randNum) {
     alert('Your total tip amount = $' + totalTip);
     return totalTip;
 }
-
+/** alert("Your tip should be: $" + calculateTip(prompt("Please enter your bill amount."), prompt("Please enter your desired tip percentage."))); */
 console.log(calculateTip());
 
 /**
