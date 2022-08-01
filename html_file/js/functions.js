@@ -38,7 +38,7 @@ sayHello(myName);
 // Don't modify the following line, it generates a random number between 1 and 3
 // and stores it in a variable named random
 var random = Math.floor((Math.random() * 3) + 1);
-
+console.log(random);
 /**
  * TODO:
  * Create a function called 'isTwo' that takes a number as a parameter.
@@ -57,6 +57,13 @@ var random = Math.floor((Math.random() * 3) + 1);
  * number)
  */
 
+function isTwo(number) {
+    var test = (random === 2);
+    return test;
+}
+
+console.log(isTwo(random));
+
 /**
  * TODO:
  * Create a function named 'calculateTip' to calculate a tip on a bill at a
@@ -68,6 +75,20 @@ var random = Math.floor((Math.random() * 3) + 1);
  * > calculateTip(0.25, 25.50) // returns 6.375
  * > calculateTip(0.15, 33.42) // returns 5.013
  */
+
+function calculateTip(randNum) {
+    var userInputBill = prompt('Please enter your bill amount.');
+    confirm(`Your bill amount is $${userInputBill}?`);
+    console.log(`Bill amount is $${userInputBill}`);
+    var userInputTip = prompt('Please enter your desired tip percentage.');
+    confirm(`Your desired tip percentage is ${userInputTip}%?`);
+    console.log(`Entered tip percentage is ${userInputTip}%`);
+    var totalTip = userInputTip * userInputBill;
+    alert('Your total tip amount = $' + totalTip);
+    return totalTip;
+}
+
+console.log(calculateTip());
 
 /**
  * TODO:
