@@ -22,18 +22,18 @@
  * console.logging the function's return value
  */
 
-/**
-*function analyzeColor(color) {
-*    if (color === 'blue') {
-*        return 'Blue is the color of blueberries!'
-*    } else if (color === 'red') {
-*        return 'Red is the color of strawberries!'
-*    } else {
-*        return 'I don\'t know anything by that color.'
-*    }
-*}
-*console.log(analyzeColor('red'));
-*/
+//
+// function analyzeColor(color) {
+//     if (color === 'blue') {
+//         return 'Blue is the color of blueberries!'
+//     } else if (color === 'red') {
+//         return 'Red is the color of strawberries!'
+//     } else {
+//         return 'I don\'t know anything by that color.'
+//    }
+// }
+// console.log(analyzeColor('red'));
+
 
 // Don't change the next two lines!
 // These lines create two variables for you:
@@ -42,46 +42,49 @@
 //                  will contain a different color every time the page loads)
 var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
 var randomColor = colors[Math.floor(Math.random() * colors.length)];
-/** console.log(randomColor); */
+// console.log(randomColor);
 /**
  * TODO:
  * Pass the `randomColor` variable to your 'analyzeColor' function and console.log the results.
  * You should see a different message every time you refresh the page
  */
 
-/** console.log(analyzeColor(randomColor)); */
+// console.log(analyzeColor(randomColor));
 
 /**
  * TODO:
  * Comment out the code above, and refactor your function to use a switch-case statement
  */
-var userColor = prompt('What is your favorite color?');
-console.log(userColor);
 
-function analyzeColor(color) {
-    switch (userColor) {
-        case 'red':
-            return 'Red is the color of Strawberries!';
-            break;
-        case 'orange':
-            return 'Orange is the color of Oranges!';
-            break;
-        case 'yellow':
-            return 'Yellow is the color of bananas!';
-            break;
-        case 'green':
-            return 'Green is the color of pears!';
-            break;
-        case 'blue':
-            return 'Blue is the color of blueberries!';
-            break;
-        default:
-            return 'I don\'t know anything by the color.';
-            break;
-    }
-}
-alert(analyzeColor(userColor));
-console.log(analyzeColor());
+
+// var userColor = prompt('What is your favorite color?');
+// console.log(userColor);
+//
+// function analyzeColor(color) {
+//     switch (userColor) {
+//         case 'red':
+//             return 'Red is the color of Strawberries!';
+//             break;
+//         case 'orange':
+//             return 'Orange is the color of Oranges!';
+//             break;
+//         case 'yellow':
+//             return 'Yellow is the color of bananas!';
+//             break;
+//         case 'green':
+//             return 'Green is the color of limes!';
+//             break;
+//         case 'blue':
+//             return 'Blue is the color of blueberries!';
+//             break;
+//         default:
+//             return 'I don\'t know anything by the color.';
+//             break;
+//     }
+// }
+// alert(analyzeColor(userColor));
+// console.log(analyzeColor());
+
 
 /**
  * TODO:
@@ -112,6 +115,23 @@ console.log(analyzeColor());
  * return value.
  */
 
+// function calculateTotal(randomNumber, totalAmount) {
+//     if (randomNumber === 0) {
+//         return 0;
+//     } else if (randomNumber === 1) {
+//         return totalAmount * 0.10;
+//     } else if (randomNumber === 2) {
+//         return totalAmount * 0.25;
+//     } else if (randomNumber === 3) {
+//         return totalAmount * 0.35;
+//     } else if (randomNumber === 4) {
+//         return totalAmount * 0.50;
+//     } else (randomNumber === 5); {
+//         return totalAmount * 1;
+//     }
+// }
+// console.log(calculateTotal(5, 33.39));
+
 /**
  * TODO:
  * Uncomment the line below to generate a random number between 0 and 5.
@@ -121,7 +141,48 @@ console.log(analyzeColor());
  * price before the discount was, and what their price after the discount is.
  */
 // Generate a random number between 0 and 6
-// var luckyNumber = Math.floor(Math.random() * 6);
+var userBill = prompt('Please enter your bill amount.');
+console.log(`The user's bill  = $${userBill}`);
+
+var luckyNumber = Math.floor(Math.random() * 6);
+console.log(`The discount code is ${luckyNumber}`);
+alert(`Your randomly generated discount code is ${luckyNumber}!`);
+
+var totalAmount = function calculateTotal(userBill, luckyNumber) {
+    switch (totalAmount()) {
+        case luckyNumber === 0:
+            return `We're sorry but your discount amount is $0.`;
+            break;
+        case luckyNumber === 1:
+            return `Congratulations, your discount amount is $${userBill * 0.10}`;
+            break;
+        case luckyNumber === 2:
+            return `Congratulations, your discount amount is $${userBill * 0.25}`;
+            break;
+        case luckyNumber === 3:
+            return `Congratulations, your discount amount is $${userBill * 0.35}`;
+            break;
+        case luckyNumber === 4:
+            return `Congratulations, your discount amount is $${userBill * 0.50}`;
+            break;
+        case luckyNumber === 5:
+            return `Congratulations, your discount amount is $${userBill}`;
+            break;
+        default:
+            return alert('Unexpected error');
+            break;
+    }
+}
+console.log(totalAmount);
+
+
+
+
+
+
+
+
+
 
 /**
  * TODO:
