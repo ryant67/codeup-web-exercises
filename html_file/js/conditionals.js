@@ -61,25 +61,19 @@ var randomColor = colors[Math.floor(Math.random() * colors.length)];
 // console.log(userColor);
 //
 // function analyzeColor(color) {
-//     switch (userColor) {
+//     switch (color) {
 //         case 'red':
 //             return 'Red is the color of Strawberries!';
-//             break;
 //         case 'orange':
 //             return 'Orange is the color of Oranges!';
-//             break;
 //         case 'yellow':
 //             return 'Yellow is the color of bananas!';
-//             break;
 //         case 'green':
 //             return 'Green is the color of limes!';
-//             break;
 //         case 'blue':
 //             return 'Blue is the color of blueberries!';
-//             break;
 //         default:
 //             return 'I don\'t know anything by the color.';
-//             break;
 //     }
 // }
 // alert(analyzeColor(userColor));
@@ -141,39 +135,39 @@ var randomColor = colors[Math.floor(Math.random() * colors.length)];
  * price before the discount was, and what their price after the discount is.
  */
 // Generate a random number between 0 and 6
-var userBill = prompt('Please enter your bill amount.');
-console.log(`The user's bill  = $${userBill}`);
+// var userBill = prompt('Please enter your bill amount.');
+// console.log(`The user's bill  = $${userBill}`);
 
 var luckyNumber = Math.floor(Math.random() * 6);
-console.log(`The discount code is ${luckyNumber}`);
-alert(`Your randomly generated discount code is ${luckyNumber}!`);
+// console.log(`The discount code is ${luckyNumber}`);
+// alert(`Your randomly generated discount code is ${luckyNumber}!`);
 
-var totalAmount = function calculateTotal(userBill, luckyNumber) {
-    switch (totalAmount()) {
-        case luckyNumber === 0:
-            return `We're sorry but your discount amount is $0.`;
-            break;
-        case luckyNumber === 1:
-            return `Congratulations, your discount amount is $${userBill * 0.10}`;
-            break;
-        case luckyNumber === 2:
-            return `Congratulations, your discount amount is $${userBill * 0.25}`;
-            break;
-        case luckyNumber === 3:
-            return `Congratulations, your discount amount is $${userBill * 0.35}`;
-            break;
-        case luckyNumber === 4:
-            return `Congratulations, your discount amount is $${userBill * 0.50}`;
-            break;
-        case luckyNumber === 5:
-            return `Congratulations, your discount amount is $${userBill}`;
-            break;
-        default:
-            return alert('Unexpected error');
-            break;
-    }
-}
-console.log(totalAmount);
+// var totalAmount = function calculateTotal(userBill, luckyNumber) {
+//     switch (totalAmount()) {
+//         case luckyNumber === 0:
+//             return `We're sorry but your discount amount is $0.`;
+//             break;
+//         case luckyNumber === 1:
+//             return `Congratulations, your discount amount is $${userBill * 0.10}`;
+//             break;
+//         case luckyNumber === 2:
+//             return `Congratulations, your discount amount is $${userBill * 0.25}`;
+//             break;
+//         case luckyNumber === 3:
+//             return `Congratulations, your discount amount is $${userBill * 0.35}`;
+//             break;
+//         case luckyNumber === 4:
+//             return `Congratulations, your discount amount is $${userBill * 0.50}`;
+//             break;
+//         case luckyNumber === 5:
+//             return `Congratulations, your discount amount is $${userBill}`;
+//             break;
+//         default:
+//             return alert('Unexpected error');
+//             break;
+//     }
+// }
+// console.log(totalAmount);
 
 
 
@@ -202,3 +196,44 @@ console.log(totalAmount);
  * Can you refactor your code to use functions?
  * HINT: The way we prompt for a value could be improved
  */
+// 1. Use 'confirm' to ask the user if they would like to input a number.
+// 2. assign the 'confirm' to a variable.
+// 3. if the 'confirm' variable is true then prompt the user for a number and store it in a variable.
+// 4. alert the user whether the number is even or odd.
+// 5. add 100 and alert number to a function.
+// 6. check if number is negative or positive and return that value.
+// 7. if user inputs a value that is not a number, then inform user that input was NaN.
+
+var userNum = confirm('Would you like to input a number?');
+if (userNum) {
+    var userInp = prompt('Please input your number.');
+    if (isNaN(userInp)) {
+        alert('Your input was not a number.');
+    } else {
+        if (userInp % 2 === 0) {
+        alert('That number is even.')
+        } else if (userInp % 2 !== 0) {
+            alert('That number is odd.')
+        }
+        var newNum = Number(userInp) + 100;
+        alert(`${userInp} + 100 = ${newNum}`);
+        if (userInp < 0) {
+            alert(`That's a negative number ${userInp}.`);
+        } else if (userInp > 0) {
+            alert(`That's a positive number ${userInp}.`);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
