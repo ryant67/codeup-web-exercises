@@ -9,20 +9,18 @@
 // }
 // showMultiplicationTable(7);
 
-// 2.
-// var random = Math.floor((Math.random() * 180) + 20);
-// console.log(random);
+// // 2. (DONE!)
+// for(let i = 1; i <= 10; i++) {
+//     var randomNumber = Math.floor(Math.random() * 180) + 20;
+//     (randomNumber % 2 === 0) ? console.log(randomNumber + " is even.") :
+//         console.log(randomNumber + " is odd.");
+// }
 
 
 // 3. (DONE!)
-// let output = '';
-//     for(let i = 1; i <= 9; i++) {
-//         for(let j = 1; j <= i; j++) {
-//             output = output + i;
-//         }
-//         console.log(output);
-//         output = "";
-//     }
+// for(var i = 1; i <= 9; i++) {
+//     console.log(i.toString().repeat(i));
+// }
 
 // 4. (DONE!)
 // for(var y = 100; y > 0; y-=5) {

@@ -12,9 +12,9 @@ for (var y = 1; y < 50; y++) {
         continue;
     }
     if (y === Number(response)) {
-        console.log(`Yikes! Skipping number: ${y}`);
+        console.log(`Yikes! Skipping number: ${y}`);    //("Yikes! Skipping number: " + y);
     } else {
-        console.log(`Here is an odd number: ${y}`);
+        console.log(`Here is an odd number: ${y}`);     //("Here is an odd number: " + y);
     }
 }
 
