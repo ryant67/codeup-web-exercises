@@ -57,7 +57,7 @@
     // shoppers.forEach(function(shopper){
     //     if (shopper.amount > 200) {
     //         let total = shopper.amount * 0.12;
-    //         console.log(`${shopper.name}, you paid $${shopper.amount} which qualified you for a ${discount}.\n Your new total is $${shopper.amount - total}.`);
+    //         console.log(`${shopper.name}, you paid $${shopper.amount} which qualifies you for a ${discount} discount.\n Your new total is $${shopper.amount - total}.`);
     //     }else{
     //         console.log(`${shopper.name}, you paid $${shopper.amount} which does not qualify you for\n a discount. There is no change in your total.`);
     //     }
@@ -147,11 +147,17 @@
      *      ...
      */
 
-    books.forEach(function(book){
-       console.log(book.order);
-       console.log(`Title: ${book.title}`);
-       console.log(`Author: ${book.author.firstName} ${book.author.lastName}`);
-    });
+    for(let i = 0; i < 5; i++) {
+        console.log(`Book # ${books[i]}`)
+        console.log(`Title: ${books.title}`);
+        console.log(`Author: ${books.author.firstName} ${books.author.lastName}`);
+    }
+
+    // books.forEach(function(book){
+    //    console.log(book.order);
+    //    console.log(`Title: ${book.title}`);
+    //    console.log(`Author: ${book.author.firstName} ${book.author.lastName}`);
+    // });
 
     /**
      * Bonus:
@@ -164,8 +170,10 @@
      *   `showBookInfo` function.
      */
 
-    function createBook(title, author) {
-
-    }
+    // let createBook = (title, author) => ({
+    //     title,
+    //     author
+    //     })
+    // console.log(createBook(books));
 
 })();
