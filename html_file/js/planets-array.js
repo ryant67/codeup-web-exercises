@@ -35,8 +35,7 @@
     console.log(planets);
     //
     // console.log('Finding and logging the index of "Earth" in the planets array.');
-    var earth = planets.indexOf('Earth');
-    console.log(earth);
+    console.log(planets.indexOf('Earth'));
     //
     // console.log("Reversing the order of the planets array.");
     planets.reverse();
