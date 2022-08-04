@@ -1,8 +1,6 @@
 (function(){
     "use strict";
 
-
-
     /**
      * TODO:
      * Convert planetsString to an array, and save it in a variable named
@@ -25,12 +23,17 @@
      * string, and <li> tags around each planet.
      */
 
-    var planets = "Mercury<br>Venus<br>Earth<br>Mars<br>Jupiter<br>Saturn<br>Uranus<br>Neptune";
+    var planets = planetsString.split('|').join('<br>');
+               // planetsString.replaceAll('|', '<br>');
+        // "Mercury<br>Venus<br>Earth<br>Mars<br>Jupiter<br>Saturn<br>Uranus<br>Neptune";
     document.body.innerHTML += planets;
     console.log(planets);
 
-    var planetsList = "<ul><li>Mercury</li><li>Venus</li><li>Earth</li><li>Mars</li><li>Jupiter</li><li>Saturn</li>" +
-        "<li>Uranus</li><li>Neptune</li></ul>";
+    planetsArray.push('</ul>');
+    planetsArray.unshift('<ul>');
+    var planetsList = planetsArray.join('<li>');
+        // "<ul><li>Mercury</li><li>Venus</li><li>Earth</li><li>Mars</li><li>Jupiter</li><li>Saturn</li>" +
+        // "<li>Uranus</li><li>Neptune</li></ul>";
     document.body.innerHTML += planetsList;
     console.log(planetsList);
 
