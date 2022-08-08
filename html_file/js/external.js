@@ -51,16 +51,3 @@ var premCust = confirm('Click "okay" if you\'re a Premium Customer.'); {
 var prodOffer = items === true || premCust === true; {
     console.log(prodOffer);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -12,12 +12,18 @@
      *  > console.log(person.lastName) // "Sanchez"
      */
 
+    // Dot Notation;
     // let person = {};
     // person.firstName = "Ryan";
     // person.lastName = "Harris";
+
+    // Literal Notation;
+    // let person = {
+    //     firstName: "Ryan",
+    //     lastName: "Harris"
+    //     }
     //
-    // console.log(person.firstName);
-    // console.log(person.lastName);
+    // console.log(`${person.firstName} ${person.lastName}`);
 
     /**
      * TODO:
@@ -28,6 +34,11 @@
      * Example
      * > console.log(person.sayHello()) // "Hello from Rick Sanchez!"
      */
+
+    // person.sayHello = function() {
+    //     return `Hello from ${person.firstName} ${person.lastName}!`
+    // }
+    // console.log(person.sayHello());
 
     // person.sayHello = "Hello from";
     // console.log(`${person.sayHello} ${person.firstName} ${person.lastName}!`);
@@ -57,14 +68,11 @@
     // shoppers.forEach(function(shopper){
     //     if (shopper.amount > 200) {
     //         let total = shopper.amount * 0.12;
-    //         console.log(`${shopper.name}, you paid $${shopper.amount} which qualifies you for a ${discount} discount.\n Your new total is $${shopper.amount - total}.`);
+    //         console.log(`${shopper.name}, you paid $${shopper.amount} which qualifies you for a ${discount} discount. Your new total is $${shopper.amount - total}.`);
     //     }else{
-    //         console.log(`${shopper.name}, you paid $${shopper.amount} which does not qualify you for\n a discount. There is no change in your total.`);
+    //         console.log(`${shopper.name}, you paid $${shopper.amount} which does not qualify you for a discount. There is no change in your total.`);
     //     }
     // });
-
-
-
 
     /** TODO:
      * Create an array of objects that represent books and store it in a
@@ -79,9 +87,8 @@
      * > console.log(books[0].author.lastName) // "Adams"
      */
 
-    var books = [
+    let books = [
         {
-            order: 'Book # 1',
             title: 'Dune',
             author: {
                 firstName: 'Frank',
@@ -89,7 +96,6 @@
             }
         },
         {
-            order: 'Book # 2',
             title: 'The Lovely Bones',
             author: {
                 firstName: 'Alice',
@@ -97,7 +103,6 @@
             }
         },
         {
-            order: 'Book # 3',
             title: 'A Game of Thrones',
             author: {
                 firstName: 'George R.R.',
@@ -105,7 +110,6 @@
             }
         },
         {
-            order: 'Book # 4',
             title: 'Where the Truth Lies',
             author: {
                 firstName: 'MJ',
@@ -113,7 +117,6 @@
             }
         },
         {
-            order: 'Book # 5',
             title: 'The Wolf\'s Call',
             author: {
                 firstName: 'Anthony',
@@ -147,17 +150,12 @@
      *      ...
      */
 
-    for(let i = 0; i < 5; i++) {
-        console.log(`Book # ${books[i]}`)
-        console.log(`Title: ${books.title}`);
-        console.log(`Author: ${books.author.firstName} ${books.author.lastName}`);
-    }
-
-    // books.forEach(function(book){
-    //    console.log(book.order);
-    //    console.log(`Title: ${book.title}`);
-    //    console.log(`Author: ${book.author.firstName} ${book.author.lastName}`);
-    // });
+    books.forEach(function(book, index){
+        console.log(`Book # ${index + 1}`);
+        console.log(`Title: ${book.title}`);
+        console.log(`Author: ${book.author.firstName} ${book.author.lastName}`);
+        console.log("-----")
+    });
 
     /**
      * Bonus:
@@ -169,11 +167,4 @@
      *   outputs the information described above. Refactor your loop to use your
      *   `showBookInfo` function.
      */
-
-    // let createBook = (title, author) => ({
-    //     title,
-    //     author
-    //     })
-    // console.log(createBook(books));
-
 })();
