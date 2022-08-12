@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register With Us</title>
+</head>
+<body>
+<form method="POST" action="https://request-inspector.glitch.me/">
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text" placeholder="Username">
+    <br>
+    <label for="password">Password</label>
+    <input id="password" name="password" type="text" placeholder="Password">
+    <br>
+    <label for="bio">Bio</label>
+    <textarea id="bio" name="bio" placeholder="Please input your bio."></textarea>
+    <br>
+    <hr>
+    <fieldset>
+        <legend>How did you hear about us?</legend>
+        <input id="billboard" value="billboard" name="hear about us" type="radio"> <label for="billboard">Billboard</label>
+        <input id="radio ad" value="radio ad" name="hear about us" type="radio"> <label for="radio ad">Radio Advertisement</label>
+        <input id="internet" value="internet" name="hear about us" type="radio"> <label for="internet">Internet Advertisement</label>
+        <input id="other" value="other" name="hear about us" type="radio"> <label for="other">Other</label>
+    </fieldset>
+    <fieldset>
+        <legend>What web browser are you using?</legend>
+        <select name="web-browser">
+            <option value="chrome">Google Chrome</option>
+            <option value="safari">Safari</option>
+            <option value="explorer">Internet Explorer</option>
+            <option value="other">Other</option>
+        </select>
+    </fieldset>
+    <button type="submit">Submit Information</button>
+</form>
+</body>
+</html>
+
