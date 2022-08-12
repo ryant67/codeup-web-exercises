@@ -1,3 +1,60 @@
-.fancy-header {
-    color: purple;
+body {
+    background-color: black;
+    background-image: url("../img/background.jpeg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: black;
+    font-family: Helvetica, sans-serif;
 }
+
+.fancy-header1 {
+    text-align: center;
+    color: aqua;
+    text-decoration: underline;
+}
+
+.fancy-header2 {
+    color: greenyellow;
+    text-decoration: underline;
+}
+
+.fancy-header3 {
+    color: greenyellow;
+    text-decoration: underline;
+    text-indent: 100px;
+}
+
+ul {
+    list-style: square;
+}
+
+ol {
+    list-style: upper-alpha;
+}
+
+table{
+    text-indent: 25px;
+}
+
+th {
+    font-weight: bold;
+    text-align: center;
+}
+
+td {
+    font-weight: lighter;
+    text-align: center;
+}
+
+a:link {
+    color: aqua;
+}
+a:visited {
+    color: aqua;
+}
+a:hover {
+    color: greenyellow;
+}
+
+
+
