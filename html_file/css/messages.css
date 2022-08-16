@@ -6,3 +6,40 @@ body, html {
     font-family: Arial, Ubuntu, sans-serif;
 }
 
+.message-info {
+    padding: .5em 0 .5em 20px;
+    border: 1px solid gray;
+    border-radius: 7px;
+    margin: 25px 25px 10px 25px;
+    color: darkslateblue;
+    background-color: powderblue;
+}
+
+.message-success {
+    padding: .5em 0 .5em 20px;
+    border: 1px solid gray;
+    border-radius: 7px;
+    margin: 10px 25px;
+    color: darkgreen;
+    background-color: lightgreen;
+    filter: brightness(125%);
+}
+
+.message-warning {
+    padding: .5em 0 .5em 20px;
+    border: 1px solid gray;
+    border-radius: 7px;
+    margin: 10px 25px;
+    color: gold;
+    background-color: lightgoldenrodyellow;
+}
+
+.message-error {
+    padding: .5em 0 .5em 20px;
+    border: 1px solid gray;
+    border-radius: 7px;
+    margin: 10px 25px;
+    color: red;
+    background-color: lightcoral;
+    filter: brightness(150%);
+}
