@@ -62,7 +62,7 @@ a {
     line-height: 80px;
 }
 .profile-details {
-    width: calc(25% - 5%);
+    width: calc(25% - 1em);
     float: left;
     margin: 0 .5em;
 }
@@ -74,12 +74,12 @@ a {
     margin: .5em;
 }
 .timeline {
-    width: calc(50% - .5em);
+    width: calc(50% - 1em);
     float: left;
     margin: 0 .5em;
 }
 .who-to-follow {
-    width: calc(25% - .5em);
+    width: calc(25% - 1em);
     float: right;
     margin: 0 .5em;
 }
