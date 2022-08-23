@@ -1,3 +1,6 @@
+body {
+    font-family: "Times New Roman", sans-serif;
+}
 .header {
     font-size: 3.5em;
 }
@@ -6,4 +9,26 @@
 }
 .list-group {
     list-style: none;
+}
+.divider {
+    margin-top: 30px;
+    height: 5px !important;
+    color: green;
+}
+@media only screen and (min-width: 992px) {
+    .list-group {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .column-left {
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+    }
+    .dev-right {
+        clear: left;
+        height: 60%;
+        width: 60%;
+    }
 }
