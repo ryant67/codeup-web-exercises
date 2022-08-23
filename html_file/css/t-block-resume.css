@@ -28,7 +28,6 @@ body {
     }
     .dev-right {
         clear: left;
-        height: 60%;
         width: 60%;
     }
 }
