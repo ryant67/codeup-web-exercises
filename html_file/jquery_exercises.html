@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jQuery Exercises</title>
+</head>
+<body>
+
+    <div id="container">
+        <h1 id="main-header">This is my jQuery Header</h1>
+        <p id="content">This is my content for this exercise.</p>
+
+        <ul>
+            <li class="codeup">Item 1</li>
+            <li class="codeup">Item 2</li>
+            <li id="codeup">Item 3</li>
+        </ul>
+    </div>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script>
+
+        // alert($("#main-header").html());
+        // alert(jQuery("#content").html());
+
+        // $(".codeup").css("border", "1px solid red");
+
+        // $("li").css("font-size", "20px");
+
+        //$("h1").css("background", "yellow");
+        // $("p").css("background", "yellow");
+        // $("li").css("background", "yellow");
+
+        // $("h1, p, li").css("background", "yellow");
+
+        // alert($("h1").html());
+
+        $("#main-header").click(function () {
+            $(this).css("background", "yellow");
+        });
+
+        $("p").dblclick(function () {
+            $(this).css("font-size", "18px");
+        });
+
+        $("li").hover(
+            function () {
+                $(this).css("color", "red");
+            },
+            function () {
+                $(this).css("color", "black");
+            }
+        );
+
+    </script>
+</body>
+</html>
