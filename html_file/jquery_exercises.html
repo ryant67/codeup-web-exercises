@@ -45,6 +45,7 @@
             $(this).css("font-size", "18px");
         });
 
+        //"this" method used for hover
         $("li").hover(
             function () {
                 $(this).css("color", "red");
@@ -53,6 +54,16 @@
                 $(this).css("color", "black");
             }
         );
+
+        // variables used for hover
+        // let listItems = $("li");
+        // let hoverIn = function () {
+        //     listItems.css("color", "red");
+        // };
+        // let hoverOut = function () {
+        //     listItems.css("color", "black");
+        // };
+        // listItems.hover(hoverIn, hoverOut);
 
     </script>
 </body>
