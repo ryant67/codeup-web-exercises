@@ -115,10 +115,10 @@
             text-align: center;
             color: #00E0FF;
         }
-        #refreshBtn {
-            margin: 0 auto;
-            width: 50vw;
-        }
+        /*#refreshBtn {*/
+        /*    margin: 0 auto;*/
+        /*    width: 50vw;*/
+        /*}*/
 
     </style>
 </head>
@@ -140,9 +140,7 @@
     <tbody id="insertProducts"></tbody>
 </table>
 
-<div id="refreshBtn">
-    <button>Refresh Inventory</button>
-</div>
+<button id="refreshBtn">Refresh Inventory</button>
 
 <div>
 <div id="stars"></div>
@@ -167,21 +165,70 @@
         console.log(data);
     });
 
+    // $(document).ready(function () {
+    //     $.get('data/inventory.json',
+    //         function (data) {
+    //             let content = '';
+    //             $.each(data, function (key, value) {
+    //                 content += '<tr>';
+    //                 content += '<td>' + value.title + '</td>';
+    //                 content += '<td>' + value.quantity + '</td>';
+    //                 content += '<td>' + value.price + '</td>';
+    //                 content += '<td>' + value.categories + '</td>';
+    //                 content += '</tr>';
+    //             });
+    //             $("#insertProducts").append(content);
+    //         }).fail(function (jqXhr, status, error) {
+    //         console.log(jqXhr);
+    //         console.log(status);
+    //         console.log(error);
+    //     });
+    // });
+
+
+
     $(document).ready(function() {
-        $.get('data/inventory.json',
-            function(data) {
-        let content = '';
-        $.each(data, function(key, value) {
-            content += '<tr>';
-            content += '<td>' + value.title + '</td>';
-            content += '<td>' + value.quantity + '</td>';
-            content += '<td>' + value.price + '</td>';
-            content += '<td>' + value.categories + '</td>';
-            content += '</tr>';
+
+
+
+        function createHTML (data) {
+            let content = '';
+            $.each(data, function(key, value) {
+                content += '<tr>';
+                content += '<td>' + value.title + '</td>';
+                content += '<td>' + value.quantity + '</td>';
+                content += '<td>' + value.price + '</td>';
+                content += '<td>' + value.categories + '</td>';
+                content += '</tr>';
             });
-            $("#insertProducts").append(content);
+            return content;
+        }
+
+
+        function updatePage() {
+            $.get('data/inventory.json').done(function(orders) {
+                let ordersHTML = createHTML(orders);
+                $("#insertProducts").html(ordersHTML);
+            }).fail(function(jqXhr, status, error) {
+                console.log(jqXhr);
+                console.log(status);
+                console.log(error);
+            });
+        }
+        updatePage();
+
+        $("#refreshBtn").on("click", function() {
+            updatePage();
         });
+
+        setInterval(function() {
+            updatePage();
+        }, 3000);
+
+
     });
+
+
 
 
 
