@@ -30,7 +30,15 @@
     margin: 20px;
     opacity: 0;
 }
+.panel p {
+    font-size: 30px;
+    opacity: 0;
+}
 .panel.active h5 {
+    opacity: 1;
+    transition: opacity 0.3s ease-in 0.4s;
+}
+.panel.active p {
     opacity: 1;
     transition: opacity 0.3s ease-in 0.4s;
 }
