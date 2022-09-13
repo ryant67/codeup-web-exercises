@@ -4,33 +4,139 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!--Mapbox CSS-->
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+
+    <!--Custom CSS-->
+    <style>
+        #map {
+            width: 100%;
+            height: 600px;
+        }
+    </style>
+
     <title>Weather Map Project</title>
 </head>
 <body>
 
-
-
-
+<!--Map Container-->
+<div id="map"></div>
 
 
 <!--jQuery-->
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+<!--Mapbox JS-->
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+
 <!--API Keys-->
 <script src="js/keys.js"></script>
 
 <script>
     "use strict";
 
-    $.get('api.openweathermap.org/data/2.5/forecast', {
+
+    //WEATHER MAP AJAX REQUEST
+    $.get('https://api.openweathermap.org/data/2.5/forecast', {
         appid: WEATHER_MAP,
         lat: 41.314542,
         lon: -122.311510,
         units: 'imperial'
     }).done(function(data) {
         console.log(data);
+
+        for(let i = 0; i < data.list.length; i += 8) {
+
+            let minTemp = (data.list[i].main.temp_min); //minTemp
+            console.log(`${i} minTemp: ${minTemp}`);
+
+            let maxTemp = (data.list[i].main.temp_max); //maxTemp
+            console.log(`${i} maxTemp: ${maxTemp}`);
+
+            let humidity = (data.list[i].main.humidity); //humidity
+            console.log(`${i} humidity: ${humidity}`);
+
+            let forecast = (data.list[i].weather[0].main); //forecast
+            console.log(`${i} forecast: ${forecast}`);
+
+            let forecastDesc = (data.list[i].weather[0].description); //forecast Description
+            console.log(`${i} forecastDesc: ${forecastDesc}`);
+
+            let windSpeed = (data.list[i].wind.speed); //wind speed
+            console.log(`${i} windSpeed: ${windSpeed}`);
+        }
+
+        // // Getting the min_temp
+        // for(let i = 0; i < data.list.length; i += 8) {
+        //     let minTemp = (data.list[i].main.temp_min);
+        //     // console.log(minTemp);
+        // }
+
+        // // Getting the max_temp
+        // for(let i = 0; i < data.list.length; i += 8) {
+        //     let maxTemp = (data.list[i].main.temp_max);
+        //     // console.log(maxTemp);
+        // }
+
+        // //Getting the average temp
+        // for(let i = 0; i < data.list.length; i += 8) {
+        //     let minTemp = (data.list[i].main.temp_min);
+        //     let maxTemp = (data.list[i].main.temp_max);
+        //     let averageWeather = (minTemp + maxTemp) / 2;
+        //     // console.log((Math.round(averageWeather * 100) / 100).toFixed(2)); //gives average temp with only 2 numbers after decimal
+        // }
+
+        // //Getting the humidity
+        // for(let i = 0; i < data.list.length; i += 8) {
+        //     let humidity = (data.list[i].main.humidity);
+        //     // console.log(humidity);
+        // }
+
+        // // Getting the "feels-like" temp
+        // for(let i = 0; i < data.list.length; i += 8) {
+        //     let feelsLike = (data.list[i].main.feels_like);
+        //     // console.log(feelsLike);
+        // }
+
+        // // Getting the forecast
+        // for(let i = 0; i < data.list.length; i += 8) {
+        //     let forecast = (data.list[i].weather[0].main);
+        //     // console.log(forecast);
+        // }
+
+        // // Getting the forecast description
+        // for(let i = 0; i < data.list.length; i += 8) {
+        //     let forecastDesc = (data.list[i].weather[0].description);
+        //     // console.log(forecastDesc);
+        // }
+
+        // // Getting wind speed
+        // for(let i = 0; i < data.list.length; i += 8) {
+        //     let windSpeed = (data.list[i].wind.speed);
+        //     // console.log(windSpeed);
+        // }
+
+
     }).fail(function(error) {
         console.log(error);
     });
+
+
+    // MAPBOX AJAX REQUEST
+    mapboxgl.accessToken = MAPBOX_TOKEN;
+    let map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/navigation-night-v1',
+        zoom: 12,
+        center: [-122.311510, 41.314542]
+    });
+    let marker = new mapboxgl.Marker({
+        color: 'red'
+    })
+        .setLngLat([-122.311510, 41.314542])
+        .addTo(map);
+
 
 
 </script>
