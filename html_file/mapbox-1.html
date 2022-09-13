@@ -24,6 +24,8 @@
 
 <!-- Mapbox JS -->
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js'></script>
+
+<!--Mapbox Token-->
 <script src="js/keys.js"></script>
 
 <!-- Custom JS -->
@@ -35,6 +37,17 @@
         zoom: 10,
         center: [-98.4916, 29.4252]
     });
+
+    // setTimeout(function () {
+    //     map.setZoom(3);
+    // }, 5000);
+
+    setTimeout(function() {
+        map.setCenter([-95.7129, 37.0902]);
+        map.setZoom(3);
+        map.setStyle('mapbox://styles/mapbox/satellite-v9');
+    }, 5000);
+
 </script>
 </body>
 </html>
