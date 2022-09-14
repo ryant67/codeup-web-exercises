@@ -22,8 +22,13 @@
 </head>
 <body>
 
+<label for="search">Search weather in your area:</label>
+<input type="text" name="search" id="search">
+<button type="button" id="btn">Search</button>
+
 <!--Map Container-->
 <div id="map"></div>
+<pre id="coordinates" class="coordinates"></pre>
 
 <!--Weather Cards-->
 <div class="container">
@@ -143,95 +148,34 @@
         });
     };
 
-    //WEATHER MAP AJAX REQUEST
-    const weatherRequest = $.get('https://api.openweathermap.org/data/2.5/forecast', {
-        appid: WEATHER_MAP,
-        lat: 32.779167,
-        lon: -96.808891,
-        units: 'imperial'
-    }).done(function(data) {
-        console.log(data);
 
-        for(let i = 0; i < data.list.length; i += 8) {
-
-            let minTemp = (data.list[i].main.temp_min); //minTemp
-            // console.log(`${i} minTemp: ${minTemp}`);
-
-            let maxTemp = (data.list[i].main.temp_max); //maxTemp
-            // console.log(`${i} maxTemp: ${maxTemp}`);
-
-            let humidity = (data.list[i].main.humidity); //humidity
-            // console.log(`${i} humidity: ${humidity}`);
-
-            let forecast = (data.list[i].weather[0].main); //forecast
-            // console.log(`${i} forecast: ${forecast}`);
-
-            let forecastDesc = (data.list[i].weather[0].description); //forecast description
-            // console.log(`${i} forecastDesc: ${forecastDesc}`);
-
-            let windSpeed = (data.list[i].wind.speed); //wind speed
-            // console.log(`${i} windSpeed: ${windSpeed}`);
+    //GEOCODE FUNCTIONS
+    function geocode(search, token) {
+        var baseUrl = 'https://api.mapbox.com';
+        var endPoint = '/geocoding/v5/mapbox.places/';
+        return fetch(baseUrl + endPoint + encodeURIComponent(search) + '.json' + "?" + 'access_token=' + token)
+            .then(function(res) {
+                return res.json();
+            }).then(function(data) {
+                return data.features[0].center;
+            });
+    }
+    function reverseGeocode(coordinates, token) {
+            var baseUrl = 'https://api.mapbox.com';
+            var endPoint = '/geocoding/v5/mapbox.places/';
+            return fetch(baseUrl + endPoint + coordinates.lng + "," + coordinates.lat + '.json' + "?" + 'access_token=' + token)
+                .then(function(res) {
+                    return res.json();
+                })
+                // to get all the data from the request, comment out the following three lines...
+                .then(function(data) {
+                    return data.features[0].place_name;
+                });
         }
 
-        /*
-        // // Getting the min_temp
-        // for(let i = 0; i < data.list.length; i += 8) {
-        //     let minTemp = (data.list[i].main.temp_min);
-        //     // console.log(minTemp);
-        // }
+    const coordinates = document.getElementById('coordinates');
 
-        // // Getting the max_temp
-        // for(let i = 0; i < data.list.length; i += 8) {
-        //     let maxTemp = (data.list[i].main.temp_max);
-        //     // console.log(maxTemp);
-        // }
-
-        // //Getting the average temp
-        // for(let i = 0; i < data.list.length; i += 8) {
-        //     let minTemp = (data.list[i].main.temp_min);
-        //     let maxTemp = (data.list[i].main.temp_max);
-        //     let averageWeather = (minTemp + maxTemp) / 2;
-        //     // console.log((Math.round(averageWeather * 100) / 100).toFixed(2)); //gives average temp with only 2 numbers after decimal
-        // }
-
-        // //Getting the humidity
-        // for(let i = 0; i < data.list.length; i += 8) {
-        //     let humidity = (data.list[i].main.humidity);
-        //     // console.log(humidity);
-        // }
-
-        // // Getting the "feels-like" temp
-        // for(let i = 0; i < data.list.length; i += 8) {
-        //     let feelsLike = (data.list[i].main.feels_like);
-        //     // console.log(feelsLike);
-        // }
-
-        // // Getting the forecast
-        // for(let i = 0; i < data.list.length; i += 8) {
-        //     let forecast = (data.list[i].weather[0].main);
-        //     // console.log(forecast);
-        // }
-
-        // // Getting the forecast description
-        // for(let i = 0; i < data.list.length; i += 8) {
-        //     let forecastDesc = (data.list[i].weather[0].description);
-        //     // console.log(forecastDesc);
-        // }
-
-        // // Getting wind speed
-        // for(let i = 0; i < data.list.length; i += 8) {
-        //     let windSpeed = (data.list[i].wind.speed);
-        //     // console.log(windSpeed);
-        // }
-
-        */
-
-    }).fail(function(error) {
-        console.log(error);
-    });
-
-
-    // MAPBOX AJAX REQUEST
+    //MAPBOX AJAX REQUEST
     mapboxgl.accessToken = MAPBOX_TOKEN;
     let map = new mapboxgl.Map({
         container: 'map',
@@ -241,46 +185,69 @@
         center: [-96.808891, 32.779167]
     });
 
-    // MAPBOX GEOCODER
-    const geocoder = new MapboxGeocoder({
-        accessToken: mapboxgl.accessToken,
-        marker: {
-            color: 'red',
-            draggable: 'true'
-        },
-        mapboxgl: mapboxgl
+
+    $("#btn").on('click', function (){
+        let search = $("#search").val();
+        console.log(search)
+        geocode(search, MAPBOX_TOKEN).then(function(result) {
+            console.log(result);
+            map.setCenter(result);
+            map.setZoom(9);
+            //Marker
+            const marker = new mapboxgl.Marker({
+                draggable: true
+            })
+                .setLngLat([result[0], result[1]])
+                .addTo(map);
+
+            //Marker Drag
+            function onDragEnd() {
+                const lngLat = marker.getLngLat();
+                // coordinates.style.display = 'block';
+                // coordinates.value = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
+            }
+            marker.on('dragend', onDragEnd);
+
+            //Weather Map Request
+            const weatherRequest = $.get('https://api.openweathermap.org/data/2.5/forecast', {
+                appid: WEATHER_MAP,
+                lat: result[1],
+                lon: result[0],
+                units: 'imperial'
+            }).done(function(data) {
+                console.log(data);
+
+                //Name of city searched
+                console.log(data.city.name)
+
+                for(let i = 0; i < data.list.length; i += 8) {
+
+                    let minTemp = (data.list[i].main.temp_min); //minTemp
+                    // console.log(`${i} minTemp: ${minTemp}`);
+
+                    let maxTemp = (data.list[i].main.temp_max); //maxTemp
+                    // console.log(`${i} maxTemp: ${maxTemp}`);
+
+                    let humidity = (data.list[i].main.humidity); //humidity
+                    // console.log(`${i} humidity: ${humidity}`);
+
+                    let forecast = (data.list[i].weather[0].main); //forecast
+                    // console.log(`${i} forecast: ${forecast}`);
+
+                    let forecastDesc = (data.list[i].weather[0].description); //forecast description
+                    // console.log(`${i} forecastDesc: ${forecastDesc}`);
+
+                    let windSpeed = (data.list[i].wind.speed); //wind speed
+                    // console.log(`${i} windSpeed: ${windSpeed}`);
+                }
+            }).fail(function(error) {
+                console.log(error);
+            });
+
+        });
     });
-    map.addControl(geocoder);
 
-    console.log(geocoder);
-
-
-    // console.log(geocoder.geolocation.getCurrentPosition());
-
-    // geocoder.on("click", function(){
-    //     geocoder.geolocation.getCurrentPosition()
-    // });
-
-    // function getCoordinates() {
-    //     geocoder.on("click", function(){
-    //         console.log(geocoder.inputString.value);
-    //     });
-    // }
-    // getCoordinates()
-
-    // function geocode(search, token) {
-    //     var baseUrl = 'https://api.mapbox.com';
-    //     var endPoint = '/geocoding/v5/mapbox.places/';
-    //     return fetch(baseUrl + endPoint + encodeURIComponent(search) + '.json' + "?" + 'access_token=' + token)
-    //         .then(function(res) {
-    //             return res.json();
-    //             // to get all the data from the request, comment out the following three lines...
-    //         }).then(function(data) {
-    //             return data.features[0].center;
-    //         });
-    // }
-    // geocode()
-    //
+    /*
     // function reverseGeocode(coordinates, token) {
     //     var baseUrl = 'https://api.mapbox.com';
     //     var endPoint = '/geocoding/v5/mapbox.places/';
@@ -294,6 +261,7 @@
     //         });
     // }
     // reverseGeocode();
+     */
 
 
 
