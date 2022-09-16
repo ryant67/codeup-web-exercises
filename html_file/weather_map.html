@@ -32,86 +32,7 @@
 
 <!--Weather Cards-->
 <div class="container">
-    <div class="panel active">
-        <h5 class="temperature">Temperature Range</h5>
-        <p id="min-max-temp"></p>
-        <hr>
-        <h5 class="humidity">Humidity</h5>
-        <p id="today-humidity"></p>
-        <hr>
-        <h5 class="wind-speed">Wind Speed</h5>
-        <p id="today-wind"></p>
-        <hr>
-        <h5 class="forecast">Forecast</h5>
-        <p id="today-forecast"></p>
-        <hr>
-        <h5 class="forecast-details">Forecast Details</h5>
-        <p id="today-forecast-details"></p>
-    </div>
-    <div class="panel">
-        <h5 class="temperature">Temperature Range</h5>
-        <p id="min-max-temp1"></p>
-        <hr>
-        <h5 class="humidity">Humidity</h5>
-        <p id="today-humidity1"></p>
-        <hr>
-        <h5 class="wind-speed">Wind Speed</h5>
-        <p id="today-wind1"></p>
-        <hr>
-        <h5 class="forecast">Forecast</h5>
-        <p id="today-forecast1"></p>
-        <hr>
-        <h5 class="forecast-details">Forecast Details</h5>
-        <p id="today-forecast-details1"></p>
-    </div>
-    <div class="panel">
-        <h5 class="temperature">Temperature Range</h5>
-        <p id="min-max-temp2"></p>
-        <hr>
-        <h5 class="humidity">Humidity</h5>
-        <p id="today-humidity2"></p>
-        <hr>
-        <h5 class="wind-speed">Wind Speed</h5>
-        <p id="today-wind2"></p>
-        <hr>
-        <h5 class="forecast">Forecast</h5>
-        <p id="today-forecast2"></p>
-        <hr>
-        <h5 class="forecast-details">Forecast Details</h5>
-        <p id="today-forecast-details2"></p>
-    </div>
-    <div class="panel">
-        <h5 class="temperature">Temperature Range</h5>
-        <p id="min-max-temp34"></p>
-        <hr>
-        <h5 class="humidity">Humidity</h5>
-        <p id="today-humidity34"></p>
-        <hr>
-        <h5 class="wind-speed">Wind Speed</h5>
-        <p id="today-wind34"></p>
-        <hr>
-        <h5 class="forecast">Forecast</h5>
-        <p id="today-forecast34"></p>
-        <hr>
-        <h5 class="forecast-details">Forecast Details</h5>
-        <p id="today-forecast-details34"></p>
-    </div>
-    <div class="panel">
-        <h5 class="temperature">Temperature Range</h5>
-        <p id="min-max-temp4"></p>
-        <hr>
-        <h5 class="humidity">Humidity</h5>
-        <p id="today-humidity4"></p>
-        <hr>
-        <h5 class="wind-speed">Wind Speed</h5>
-        <p id="today-wind4"></p>
-        <hr>
-        <h5 class="forecast">Forecast</h5>
-        <p id="today-forecast4"></p>
-        <hr>
-        <h5 class="forecast-details">Forecast Details</h5>
-        <p id="today-forecast-details4"></p>
-    </div>
+<!--message here-->
 </div>
 
 
@@ -134,19 +55,22 @@
     "use strict";
 
     //PANEL CHANGE
-    const panels = document.querySelectorAll('.panel');
+    function addPanelListeners() {
+        const panels = document.querySelectorAll('.panel');
 
-    panels.forEach(function(panel) {
-        panel.addEventListener("click", function() {
-            removeActiveClasses();
-            panel.classList.add('active');
+        panels.forEach(function (panel) {
+            panel.addEventListener("click", function () {
+                removeActiveClasses();
+                panel.classList.add('active');
+            });
         });
-    });
-    function removeActiveClasses() {
-        panels.forEach(function(panel) {
-            panel.classList.remove('active');
-        });
-    };
+
+        function removeActiveClasses() {
+            panels.forEach(function (panel) {
+                panel.classList.remove('active');
+            });
+        }
+    }
 
 
     //GEOCODE FUNCTIONS
@@ -160,20 +84,6 @@
                 return data.features[0].center;
             });
     }
-    function reverseGeocode(coordinates, token) {
-            var baseUrl = 'https://api.mapbox.com';
-            var endPoint = '/geocoding/v5/mapbox.places/';
-            return fetch(baseUrl + endPoint + coordinates.lng + "," + coordinates.lat + '.json' + "?" + 'access_token=' + token)
-                .then(function(res) {
-                    return res.json();
-                })
-                // to get all the data from the request, comment out the following three lines...
-                .then(function(data) {
-                    return data.features[0].place_name;
-                });
-        }
-
-    const coordinates = document.getElementById('coordinates');
 
     //MAPBOX AJAX REQUEST
     mapboxgl.accessToken = MAPBOX_TOKEN;
@@ -189,82 +99,90 @@
     $("#btn").on('click', function (){
         let search = $("#search").val();
         console.log(search)
-        geocode(search, MAPBOX_TOKEN).then(function(result) {
-            console.log(result);
-            map.setCenter(result);
+        geocode(search, MAPBOX_TOKEN).then(function(coordinates) {
+            const latitude = coordinates[1];
+            const longitude = coordinates[0];
+            console.log(coordinates);
+            map.setCenter(coordinates);
             map.setZoom(9);
             //Marker
             const marker = new mapboxgl.Marker({
                 draggable: true
             })
-                .setLngLat([result[0], result[1]])
+                .setLngLat([longitude, latitude])
                 .addTo(map);
 
             //Marker Drag
             function onDragEnd() {
+                //can use destructuring here
                 const lngLat = marker.getLngLat();
-                // coordinates.style.display = 'block';
-                // coordinates.value = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
+                const lat = lngLat.lat;
+                const lng = lngLat.lng;
+                weatherRequest(lat, lng);
+                console.log(lngLat);
             }
             marker.on('dragend', onDragEnd);
-
-            //Weather Map Request
-            const weatherRequest = $.get('https://api.openweathermap.org/data/2.5/forecast', {
-                appid: WEATHER_MAP,
-                lat: result[1],
-                lon: result[0],
-                units: 'imperial'
-            }).done(function(data) {
-                console.log(data);
-
-                //Name of city searched
-                console.log(data.city.name)
-
-                for(let i = 0; i < data.list.length; i += 8) {
-
-                    let minTemp = (data.list[i].main.temp_min); //minTemp
-                    // console.log(`${i} minTemp: ${minTemp}`);
-
-                    let maxTemp = (data.list[i].main.temp_max); //maxTemp
-                    // console.log(`${i} maxTemp: ${maxTemp}`);
-
-                    let humidity = (data.list[i].main.humidity); //humidity
-                    // console.log(`${i} humidity: ${humidity}`);
-
-                    let forecast = (data.list[i].weather[0].main); //forecast
-                    // console.log(`${i} forecast: ${forecast}`);
-
-                    let forecastDesc = (data.list[i].weather[0].description); //forecast description
-                    // console.log(`${i} forecastDesc: ${forecastDesc}`);
-
-                    let windSpeed = (data.list[i].wind.speed); //wind speed
-                    // console.log(`${i} windSpeed: ${windSpeed}`);
-                }
-            }).fail(function(error) {
-                console.log(error);
-            });
+            weatherRequest(latitude, longitude);
         });
     });
 
-    /*
-    // function reverseGeocode(coordinates, token) {
-    //     var baseUrl = 'https://api.mapbox.com';
-    //     var endPoint = '/geocoding/v5/mapbox.places/';
-    //     return fetch(baseUrl + endPoint + coordinates.lon + "," + coordinates.lat + '.json' + "?" + 'access_token=' + token)
-    //         .then(function(res) {
-    //             return res.json();
-    //         })
-    //         // to get all the data from the request, comment out the following three lines...
-    //         .then(function(data) {
-    //             return data.features[0].place_name;
-    //         });
-    // }
-    // reverseGeocode();
-     */
+    const weatherRequest = function(latitude, longitude) {
+        $.get('https://api.openweathermap.org/data/2.5/forecast', {
+            appid: WEATHER_MAP,
+            lat: latitude,
+            lon: longitude,
+            units: 'imperial'
+        }).done(function (data) {
+            console.log(data);
 
+            //Name of city searched
+            console.log(data.city.name)
 
+            let weatherCardHTML = "";
 
+            for (let i = 0; i < data.list.length; i += 8) {
 
+                let minTemp = (data.list[i].main.temp_min); //minTemp
+                // console.log(`${i} minTemp: ${minTemp}`);
+
+                let maxTemp = (data.list[i].main.temp_max); //maxTemp
+                // console.log(`${i} maxTemp: ${maxTemp}`);
+
+                let humidity = (data.list[i].main.humidity); //humidity
+                // console.log(`${i} humidity: ${humidity}`);
+
+                let forecast = (data.list[i].weather[0].main); //forecast
+                // console.log(`${i} forecast: ${forecast}`);
+
+                let forecastDesc = (data.list[i].weather[0].description); //forecast description
+                // console.log(`${i} forecastDesc: ${forecastDesc}`);
+
+                let windSpeed = (data.list[i].wind.speed); //wind speed
+                // console.log(`${i} windSpeed: ${windSpeed}`);
+
+                weatherCardHTML += `<div class="panel">
+                                        <h5 class="temperature">Temperature Range</h5>
+                                        <p class="min-max-temp">${minTemp} - ${maxTemp}</p>
+                                        <hr>
+                                        <h5 class="humidity">Humidity</h5>
+                                        <p class="today-humidity">${humidity}</p>
+                                        <hr>
+                                        <h5 class="wind-speed">Wind Speed</h5>
+                                        <p class="today-wind">${windSpeed}</p>
+                                        <hr>
+                                        <h5 class="forecast">Forecast</h5>
+                                        <p class="today-forecast">${forecast}</p>
+                                        <hr>
+                                        <h5 class="forecast-details">Forecast Details</h5>
+                                        <p class="today-forecast-details">${forecastDesc}</p>
+                                    </div>`;
+            }
+            $(".container").html(weatherCardHTML);
+            addPanelListeners();
+        }).fail(function (error) {
+            console.log(error);
+        });
+    }
 </script>
 
 </body>
