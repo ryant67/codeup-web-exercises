@@ -36,8 +36,62 @@ const users = [
     }
 ];
 
-users.filter(u => {
-    if(users.languages >= 3) {
-        return users.languages
+//Filter
+const usersFilter = users.filter(user => user.languages.length > 2);
+
+for(let user of usersFilter) {
+    console.log(user);
+}
+
+//Map
+const usersMap = users.map(user => user.email);
+
+for(let user of usersMap) {
+    console.log(user);
+}
+
+//Reduce
+const usersReduce = users.reduce((arr, user) => {
+    if(user.yearsOfExperience) {
+    arr.push(user.yearsOfExperience);
     }
-});
+    return arr;
+}, []);
+console.log(usersReduce);
+
+const totalYears = usersReduce.reduce((accumulator, value) => {
+    return accumulator + value;
+}, 0);
+console.log(totalYears);
+
+const averageYears = totalYears / usersReduce.length;
+console.log(averageYears);
+
+//Reduce #2
+const usersEmail = users.reduce((email, user) => {
+    if(user.email.length > email.length) {
+        email = user.email
+    }
+    return email;
+}, "");
+console.log(usersEmail);
+
+//Reduce #3
+const usersName = users.reduce((arr, user) => {
+    if(user.name) {
+        arr.push(user.name);
+    }
+    return arr;
+}, [])
+console.log(usersName);
+console.log(`Your instructors are: ${usersName}`);
+
+
+
+
+
+
+
+
+
+
