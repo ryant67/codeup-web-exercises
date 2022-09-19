@@ -77,14 +77,24 @@ const usersEmail = users.reduce((email, user) => {
 console.log(usersEmail);
 
 //Reduce #3
-const usersName = users.reduce((arr, user) => {
-    if(user.name) {
-        arr.push(user.name);
+// const usersName = users.reduce((arr, user) => {
+//     if(user.name) {
+//         arr.push(user.name);
+//     }
+//     return arr;
+// }, [])
+// console.log(usersName);
+// console.log(`Your instructors are: ${usersName}`);
+
+const instructorIntro = users.reduce((names, user, index) => {
+    if (index !== users.length -1) {
+    return `${names}${user.name}, `;
+    } else {
+        return `${names}and ${user.name}.`;
     }
-    return arr;
-}, [])
-console.log(usersName);
-console.log(`Your instructors are: ${usersName}`);
+}, "Your instructors are: ");
+console.log(instructorIntro);
+
 
 
 
